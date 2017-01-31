@@ -21,6 +21,19 @@ namespace aegis.Areas.CRM.Controllers
         public JsonResult masters()
         {
             db.Configuration.ProxyCreationEnabled = false;
+            var leads = from l in db.leads.Include(l => l.organization)
+                select new LeadView
+                {
+                    leadId = l.leadId,
+                    code = l.code,
+                    firstname = l.firstname,
+                    lastname = l.lastname,
+                    organizationId = l.organizationId,
+                    rating = l.rating,
+                    email = l.email,
+                    phone = l.phone,
+                    nameorganization = l.organization.name
+                };
             return Json(db.leads.ToList(), JsonRequestBehavior.AllowGet);
         }
 
@@ -59,7 +72,7 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/leads/Create
         public ActionResult Create()
         {
-            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "code");
+            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "name");
             return View();
         }
 
@@ -77,7 +90,7 @@ namespace aegis.Areas.CRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "code", lead.organizationId);
+            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "name", lead.organizationId);
             return View(lead);
         }
 
@@ -93,7 +106,7 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "code", lead.organizationId);
+            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "name", lead.organizationId);
             return View(lead);
         }
 
@@ -110,7 +123,7 @@ namespace aegis.Areas.CRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "code", lead.organizationId);
+            ViewBag.organizationIdList = new SelectList(db.organizations, "organizationId", "name", lead.organizationId);
             return View(lead);
         }
 
@@ -149,4 +162,17 @@ namespace aegis.Areas.CRM.Controllers
             base.Dispose(disposing);
         }
     }
+}
+
+public class LeadView
+{
+    public int leadId { get; set; }
+    public string code { get; set; }
+    public string firstname { get; set; }
+    public string lastname { get; set; }
+    public int organizationId { get; set; }
+    public int rating { get; set; }
+    public string email { get; set; }
+    public string phone { get; set; }
+    public string nameorganization{ get; set; }
 }

@@ -21,7 +21,22 @@ namespace aegis.Areas.CRM.Controllers
         public JsonResult masters()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            return Json(db.organizations.ToList(), JsonRequestBehavior.AllowGet);
+            var organizations = from u in db.organizations.Include(u => u.organizationtype)
+                                select new OrganizationView
+                                {
+                                    organizationId = u.organizationId,
+                                    code = u.code,
+                                    name = u.name,
+                                    description = u.description,
+                                    fulladdress = u.fulladdress,
+                                    phone = u.phone,
+                                    email = u.email,
+                                    website = u.website,
+                                    organizationtypeId = u.organizationtypeId,
+                                    nametypeorganization = u.organizationtype.name
+                                };
+
+            return Json(organizations.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -37,7 +52,7 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/organizations/
         public ActionResult Index()
         {
-            var organizations = db.organizations.Include(o => o.organizationtype);
+           var organizations = db.organizations.Include(o => o.organizationtype);  
             return View(organizations.ToList());
         }
 
@@ -59,7 +74,7 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/organizations/Create
         public ActionResult Create()
         {
-            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "code");
+            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "name");
             return View();
         }
 
@@ -77,7 +92,7 @@ namespace aegis.Areas.CRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "code", organization.organizationtypeId);
+            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "name", organization.organizationtypeId);
             return View(organization);
         }
 
@@ -93,7 +108,7 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "code", organization.organizationtypeId);
+            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "name", organization.organizationtypeId);
             return View(organization);
         }
 
@@ -110,7 +125,7 @@ namespace aegis.Areas.CRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "code", organization.organizationtypeId);
+            ViewBag.organizationtypeIdList = new SelectList(db.organizationtypes, "organizationtypeId", "name", organization.organizationtypeId);
             return View(organization);
         }
 
@@ -149,4 +164,23 @@ namespace aegis.Areas.CRM.Controllers
             base.Dispose(disposing);
         }
     }
+}
+
+public class OrganizationView
+{
+    public int organizationId { get; set; }
+
+    public string code { get; set; }
+    public string name { get; set; }
+    public string description { get; set; }
+
+    public string fulladdress { get; set; }
+    public string phone { get; set; }
+
+    public string email { get; set; }
+
+    public string website { get; set; }
+    public int organizationtypeId { get; set; }
+
+    public string nametypeorganization { get; set; }
 }

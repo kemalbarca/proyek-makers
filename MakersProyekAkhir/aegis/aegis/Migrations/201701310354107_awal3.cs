@@ -3,16 +3,16 @@ namespace aegis.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class awal1 : DbMigration
+    public partial class awal3 : DbMigration
     {
         public override void Up()
         {
-            AlterColumn("dbo.products", "name", c => c.String(nullable: false));
+            AlterColumn("dbo.cases", "DetailForm_actiondate", c => c.DateTime());
         }
         
         public override void Down()
         {
-            AlterColumn("dbo.products", "name", c => c.String());
+            AlterColumn("dbo.cases", "DetailForm_actiondate", c => c.DateTime(nullable: false));
         }
     }
 }

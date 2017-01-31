@@ -79,7 +79,7 @@
             <div class="col-md-10">
                 <div class="input-group date" id="orderdate">
                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    @Html.EditorFor(model => model.orderdate, new { @class= "form-control" })
+                    @Html.TextBoxFor(model => model.orderdate, new { @class= "form-control" })
                 </div>
 
                 @Html.ValidationMessageFor(model => model.orderdate)

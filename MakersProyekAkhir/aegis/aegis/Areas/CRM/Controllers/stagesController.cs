@@ -21,7 +21,17 @@ namespace aegis.Areas.CRM.Controllers
         public JsonResult masters()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            return Json(db.stages.ToList(), JsonRequestBehavior.AllowGet);
+            var stages = from s in db.stages.Include(s => s.pipe)
+                         select new StageView
+                         {
+                             stageId = s.stageId,
+                             code = s.code,
+                             name = s.name,
+                             description = s.description,
+                             pipeId = s.pipeId,
+                             namepipe = s.pipe.name
+                         };
+            return Json(stages.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -59,7 +69,7 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/stages/Create
         public ActionResult Create()
         {
-            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "code");
+            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "name");
             return View();
         }
 
@@ -77,7 +87,7 @@ namespace aegis.Areas.CRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "code", stage.pipeId);
+            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "name", stage.pipeId);
             return View(stage);
         }
 
@@ -93,7 +103,7 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "code", stage.pipeId);
+            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "name", stage.pipeId);
             return View(stage);
         }
 
@@ -110,7 +120,7 @@ namespace aegis.Areas.CRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "code", stage.pipeId);
+            ViewBag.pipeIdList = new SelectList(db.pipes, "pipeId", "name", stage.pipeId);
             return View(stage);
         }
 
@@ -149,4 +159,14 @@ namespace aegis.Areas.CRM.Controllers
             base.Dispose(disposing);
         }
     }
+}
+
+public class StageView
+{
+    public int stageId { get; set; }
+    public string code { get; set; }
+    public string name { get; set; }
+    public string description { get; set; }
+    public int pipeId { get; set; }
+    public string namepipe { get; set; }
 }

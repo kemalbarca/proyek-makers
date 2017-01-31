@@ -157,7 +157,7 @@ namespace aegis.Models
         public DbSet<campaign> campaigns { get; set; }
         public DbSet<campaignline> campaignlines { get; set; }
         public DbSet<statuscase> statuscases { get; set; }
-        public DbSet<cases> casess { get; set; }
+        public DbSet<cases> cases { get; set; }
         public DbSet<casesline> caseslines { get; set; }
         public DbSet<organizationtype> organizationtypes { get; set; }
         public DbSet<organization> organizations { get; set; }

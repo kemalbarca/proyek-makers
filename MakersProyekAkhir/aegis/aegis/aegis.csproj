@@ -207,17 +207,21 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\HMTLHelperExtensions.cs" />
-    <Compile Include="Migrations\201701250237258_awal.cs" />
-    <Compile Include="Migrations\201701250237258_awal.Designer.cs">
-      <DependentUpon>201701250237258_awal.cs</DependentUpon>
+    <Compile Include="Migrations\201701300844234_awal.cs" />
+    <Compile Include="Migrations\201701300844234_awal.Designer.cs">
+      <DependentUpon>201701300844234_awal.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701251020094_awal1.cs" />
-    <Compile Include="Migrations\201701251020094_awal1.Designer.cs">
-      <DependentUpon>201701251020094_awal1.cs</DependentUpon>
+    <Compile Include="Migrations\201701300926468_awal1.cs" />
+    <Compile Include="Migrations\201701300926468_awal1.Designer.cs">
+      <DependentUpon>201701300926468_awal1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201701260502589_awal2.cs" />
-    <Compile Include="Migrations\201701260502589_awal2.Designer.cs">
-      <DependentUpon>201701260502589_awal2.cs</DependentUpon>
+    <Compile Include="Migrations\201701300947347_awal2.cs" />
+    <Compile Include="Migrations\201701300947347_awal2.Designer.cs">
+      <DependentUpon>201701300947347_awal2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701310354107_awal3.cs" />
+    <Compile Include="Migrations\201701310354107_awal3.Designer.cs">
+      <DependentUpon>201701310354107_awal3.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -552,11 +556,6 @@
     <Content Include="Areas\CRM\Views\campaigns\Details.cshtml" />
     <Content Include="Areas\CRM\Views\campaigns\Edit.cshtml" />
     <Content Include="Areas\CRM\Views\campaigns\Index.cshtml" />
-    <Content Include="Areas\CRM\Views\cases\Create.cshtml" />
-    <Content Include="Areas\CRM\Views\cases\Delete.cshtml" />
-    <Content Include="Areas\CRM\Views\cases\Details.cshtml" />
-    <Content Include="Areas\CRM\Views\cases\Edit.cshtml" />
-    <Content Include="Areas\CRM\Views\cases\Index.cshtml" />
     <Content Include="Areas\CRM\Views\producttypes\Create.cshtml" />
     <Content Include="Areas\CRM\Views\producttypes\Delete.cshtml" />
     <Content Include="Areas\CRM\Views\producttypes\Details.cshtml" />
@@ -592,6 +591,11 @@
     <Content Include="Areas\CRM\Views\statusopportunities\Details.cshtml" />
     <Content Include="Areas\CRM\Views\statusopportunities\Edit.cshtml" />
     <Content Include="Areas\CRM\Views\statusopportunities\Index.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Create.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Delete.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Details.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Edit.cshtml" />
+    <Content Include="Areas\CRM\Views\cases\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.1.min.map" />
     <None Include="Scripts\jquery-2.1.1.intellisense.js" />
@@ -1084,6 +1088,8 @@
     <Content Include="Views\Shared\_TopNavbar.cshtml" />
     <Content Include="Scripts\jquery-3.1.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.1.1.min.map" />
+    <Content Include="Views\Shared\Login.cshtml" />
+    <Content Include="Views\Shared\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -1100,14 +1106,17 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201701250237258_awal.resx">
-      <DependentUpon>201701250237258_awal.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701300844234_awal.resx">
+      <DependentUpon>201701300844234_awal.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701251020094_awal1.resx">
-      <DependentUpon>201701251020094_awal1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701300926468_awal1.resx">
+      <DependentUpon>201701300926468_awal1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201701260502589_awal2.resx">
-      <DependentUpon>201701260502589_awal2.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201701300947347_awal2.resx">
+      <DependentUpon>201701300947347_awal2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701310354107_awal3.resx">
+      <DependentUpon>201701310354107_awal3.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

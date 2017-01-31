@@ -24,6 +24,7 @@ namespace aegis.Areas.Administration.Controllers
 
         public userprofilesController()
         {
+            
         }
 
         public userprofilesController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
@@ -131,7 +132,7 @@ namespace aegis.Areas.Administration.Controllers
                     return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = model.RememberMe });
                 case SignInStatus.Failure:
                 default:
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    ModelState.AddModelError("", "Email or Password is wrong");
                     return View(model);
             }
         }

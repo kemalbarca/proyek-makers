@@ -21,7 +21,19 @@ namespace aegis.Areas.CRM.Controllers
         public JsonResult masters()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            return Json(db.casess.ToList(), JsonRequestBehavior.AllowGet);
+            var cases = from c in db.cases.Include(c => c.account).Include(c => c.product).Include(c => c.statuscase)
+                        select new CaseView
+                        {
+                            casesId = c.casesId,
+                            code = c.code,
+                            name = c.name,
+                            description = c.description,
+                            reporteddate = c.reporteddate,
+                            nameaccount = c.account.name,
+                            nameproduct = c.product.name,
+                            namestatus = c.statuscase.name
+                        };
+            return Json(cases.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -38,7 +50,7 @@ namespace aegis.Areas.CRM.Controllers
         [HttpPost]
         public String LineCreate(string fkidx, casesline line)
         {
-                cases header = db.casess.Find(Convert.ToInt32(fkidx));
+                cases header = db.cases.Find(Convert.ToInt32(fkidx));
                 line.cases = header;
                 db.caseslines.Add(line);
                 db.SaveChanges();
@@ -53,7 +65,7 @@ namespace aegis.Areas.CRM.Controllers
         {
             if (ModelState.IsValid)
             {
-                cases  header = db.casess.Find(Convert.ToInt32(fkidx));
+                cases  header = db.cases.Find(Convert.ToInt32(fkidx));
                 line.cases  = header;
                 db.Entry(line).State = EntityState.Modified;
                 db.SaveChanges();
@@ -90,8 +102,8 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/cases/
         public ActionResult Index()
         {
-            var casess = db.casess.Include(c => c.account).Include(c => c.product).Include(c => c.statuscase);
-            return View(casess.ToList());
+            var cases = db.cases.Include(c => c.account).Include(c => c.product).Include(c => c.statuscase);
+            return View(cases.ToList());
         }
 
         // GET: /CRM/cases/Details/5
@@ -101,7 +113,7 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            cases cases = db.casess.Find(id);
+            cases cases = db.cases.Find(id);
             if (cases == null)
             {
                 return HttpNotFound();
@@ -112,9 +124,9 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/cases/Create
         public ActionResult Create()
         {
-            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "code");
-            ViewBag.productIdList = new SelectList(db.products, "productId", "code");
-            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "code");
+            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "name");
+            ViewBag.productIdList = new SelectList(db.products, "productId", "name");
+            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "name");
             return View();
         }
 
@@ -127,14 +139,14 @@ namespace aegis.Areas.CRM.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.casess.Add(cases);
+                db.cases.Add(cases);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "code", cases.accountId);
-            ViewBag.productIdList = new SelectList(db.products, "productId", "code", cases.productId);
-            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "code", cases.statuscaseId);
+            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "name", cases.accountId);
+            ViewBag.productIdList = new SelectList(db.products, "productId", "name", cases.productId);
+            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "name", cases.statuscaseId);
             return View(cases);
         }
 
@@ -145,14 +157,14 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            cases cases = db.casess.Find(id);
+            cases cases = db.cases.Find(id);
             if (cases == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "code", cases.accountId);
-            ViewBag.productIdList = new SelectList(db.products, "productId", "code", cases.productId);
-            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "code", cases.statuscaseId);
+            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "name", cases.accountId);
+            ViewBag.productIdList = new SelectList(db.products, "productId", "name", cases.productId);
+            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "name", cases.statuscaseId);
             return View(cases);
         }
 
@@ -169,9 +181,9 @@ namespace aegis.Areas.CRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "code", cases.accountId);
-            ViewBag.productIdList = new SelectList(db.products, "productId", "code", cases.productId);
-            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "code", cases.statuscaseId);
+            ViewBag.accountIdList = new SelectList(db.accounts, "accountId", "name", cases.accountId);
+            ViewBag.productIdList = new SelectList(db.products, "productId", "name", cases.productId);
+            ViewBag.statuscaseIdList = new SelectList(db.statuscases, "statuscaseId", "name", cases.statuscaseId);
             return View(cases);
         }
 
@@ -182,7 +194,7 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            cases cases = db.casess.Find(id);
+            cases cases = db.cases.Find(id);
             if (cases == null)
             {
                 return HttpNotFound();
@@ -195,8 +207,8 @@ namespace aegis.Areas.CRM.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            cases cases = db.casess.Find(id);
-            db.casess.Remove(cases);
+            cases cases = db.cases.Find(id);
+            db.cases.Remove(cases);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -211,3 +223,16 @@ namespace aegis.Areas.CRM.Controllers
         }
     }
 }
+
+public class CaseView
+{
+    public int casesId { get; set; }
+    public string code { get; set; }
+    public string name { get; set; }
+    public string description { get; set; }
+    public DateTime reporteddate { get; set; }
+    public string nameaccount { get; set; }
+    public string nameproduct { get; set; }
+    public string namestatus { get; set; }
+}
+

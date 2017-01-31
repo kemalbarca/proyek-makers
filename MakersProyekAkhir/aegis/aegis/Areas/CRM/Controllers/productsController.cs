@@ -21,7 +21,19 @@ namespace aegis.Areas.CRM.Controllers
         public JsonResult masters()
         {
             db.Configuration.ProxyCreationEnabled = false;
-            return Json(db.products.ToList(), JsonRequestBehavior.AllowGet);
+            var products = from p in db.products.Include(p => p.producttype)
+                           select new ProductView
+                           {
+                               productId = p.productId,
+                               code = p.code,
+                               name = p.name,
+                               description = p.description,
+                               costprice = p.costprice,
+                               salesprice = p.salesprice,
+                               producttypeId = p.producttypeId,
+                               nametypeproduct = p.producttype.name
+                           };
+            return Json(products.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
@@ -59,7 +71,7 @@ namespace aegis.Areas.CRM.Controllers
         // GET: /CRM/products/Create
         public ActionResult Create()
         {
-            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "code");
+            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "name");
             return View();
         }
 
@@ -77,7 +89,7 @@ namespace aegis.Areas.CRM.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "code", product.producttypeId);
+            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "name", product.producttypeId);
             return View(product);
         }
 
@@ -93,7 +105,7 @@ namespace aegis.Areas.CRM.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "code", product.producttypeId);
+            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "name", product.producttypeId);
             return View(product);
         }
 
@@ -110,7 +122,7 @@ namespace aegis.Areas.CRM.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "code", product.producttypeId);
+            ViewBag.producttypeIdList = new SelectList(db.producttypes, "producttypeId", "name", product.producttypeId);
             return View(product);
         }
 
@@ -149,4 +161,16 @@ namespace aegis.Areas.CRM.Controllers
             base.Dispose(disposing);
         }
     }
+}
+
+public class ProductView
+{
+    public int productId { get; set; }
+    public string code { get; set; }
+    public string name { get; set; }
+    public string description { get; set; }
+    public decimal costprice { get; set; }
+    public decimal salesprice { get; set; }
+    public int producttypeId { get; set; }
+    public string nametypeproduct { get; set; }
 }

@@ -10,37 +10,37 @@ namespace aegis.Migrations
             CreateTable(
                 "dbo.accountactivitylines",
                 c => new
-                    {
-                        accountactivitylineId = c.Int(nullable: false, identity: true),
-                        activitydate = c.DateTime(nullable: false),
-                        accountactivitytypeId = c.Int(nullable: false),
-                        description = c.String(),
-                        account_accountId = c.Int(),
-                    })
+                {
+                    accountactivitylineId = c.Int(nullable: false, identity: true),
+                    activitydate = c.DateTime(nullable: false),
+                    accountactivitytypeId = c.Int(nullable: false),
+                    description = c.String(),
+                    account_accountId = c.Int(),
+                })
                 .PrimaryKey(t => t.accountactivitylineId)
                 .ForeignKey("dbo.accounts", t => t.account_accountId)
                 .ForeignKey("dbo.accountactivitytypes", t => t.accountactivitytypeId, cascadeDelete: true)
                 .Index(t => t.accountactivitytypeId)
                 .Index(t => t.account_accountId);
-            
+
             CreateTable(
                 "dbo.accounts",
                 c => new
-                    {
-                        accountId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        telephone = c.String(),
-                        email = c.String(),
-                        address = c.String(),
-                        accounttypeId = c.Int(nullable: false),
-                        leadsourceId = c.Int(nullable: false),
-                        statusleadId = c.Int(nullable: false),
-                        DetailForm_pkidx_accountactivitylineId = c.String(),
-                        DetailForm_ddl_accountactivitytypeId = c.Int(nullable: false),
-                        DetailForm_activitydate = c.DateTime(nullable: false),
-                        DetailForm_description = c.String(),
-                    })
+                {
+                    accountId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    telephone = c.String(),
+                    email = c.String(),
+                    address = c.String(),
+                    accounttypeId = c.Int(nullable: false),
+                    leadsourceId = c.Int(nullable: false),
+                    statusleadId = c.Int(nullable: false),
+                    DetailForm_pkidx_accountactivitylineId = c.String(),
+                    DetailForm_ddl_accountactivitytypeId = c.Int(nullable: false),
+                    DetailForm_activitydate = c.DateTime(nullable: false),
+                    DetailForm_description = c.String(),
+                })
                 .PrimaryKey(t => t.accountId)
                 .ForeignKey("dbo.accounttypes", t => t.accounttypeId, cascadeDelete: true)
                 .ForeignKey("dbo.leadsources", t => t.leadsourceId, cascadeDelete: true)
@@ -48,278 +48,278 @@ namespace aegis.Migrations
                 .Index(t => t.accounttypeId)
                 .Index(t => t.leadsourceId)
                 .Index(t => t.statusleadId);
-            
+
             CreateTable(
                 "dbo.accounttypes",
                 c => new
-                    {
-                        accounttypeId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    accounttypeId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.accounttypeId);
-            
+
             CreateTable(
                 "dbo.leadsources",
                 c => new
-                    {
-                        leadsourceId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    leadsourceId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.leadsourceId);
-            
+
             CreateTable(
                 "dbo.statusleads",
                 c => new
-                    {
-                        statusleadId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    statusleadId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.statusleadId);
-            
+
             CreateTable(
                 "dbo.accountactivitytypes",
                 c => new
-                    {
-                        accountactivitytypeId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    accountactivitytypeId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.accountactivitytypeId);
-            
+
             CreateTable(
                 "dbo.akseslines",
                 c => new
-                    {
-                        akseslineId = c.Int(nullable: false, identity: true),
-                        akses_aksesId = c.Int(),
-                        modul_modulId = c.Int(),
-                    })
+                {
+                    akseslineId = c.Int(nullable: false, identity: true),
+                    akses_aksesId = c.Int(),
+                    modul_modulId = c.Int(),
+                })
                 .PrimaryKey(t => t.akseslineId)
                 .ForeignKey("dbo.akses", t => t.akses_aksesId)
                 .ForeignKey("dbo.moduls", t => t.modul_modulId)
                 .Index(t => t.akses_aksesId)
                 .Index(t => t.modul_modulId);
-            
+
             CreateTable(
                 "dbo.akses",
                 c => new
-                    {
-                        aksesId = c.Int(nullable: false, identity: true),
-                        aksesdescription = c.String(),
-                        userrole_userroleId = c.Int(),
-                    })
+                {
+                    aksesId = c.Int(nullable: false, identity: true),
+                    aksesdescription = c.String(),
+                    userrole_userroleId = c.Int(),
+                })
                 .PrimaryKey(t => t.aksesId)
                 .ForeignKey("dbo.userroles", t => t.userrole_userroleId)
                 .Index(t => t.userrole_userroleId);
-            
+
             CreateTable(
                 "dbo.userroles",
                 c => new
-                    {
-                        userroleId = c.Int(nullable: false, identity: true),
-                        rolename = c.String(nullable: false),
-                        roledescription = c.String(),
-                    })
+                {
+                    userroleId = c.Int(nullable: false, identity: true),
+                    rolename = c.String(nullable: false),
+                    roledescription = c.String(),
+                })
                 .PrimaryKey(t => t.userroleId);
-            
+
             CreateTable(
                 "dbo.userrolelines",
                 c => new
-                    {
-                        userrolelineId = c.Int(nullable: false, identity: true),
-                        email = c.String(),
-                        applicationuser_Id = c.String(maxLength: 128),
-                        userrole_userroleId = c.Int(),
-                    })
+                {
+                    userrolelineId = c.Int(nullable: false, identity: true),
+                    email = c.String(),
+                    applicationuser_Id = c.String(maxLength: 128),
+                    userrole_userroleId = c.Int(),
+                })
                 .PrimaryKey(t => t.userrolelineId)
                 .ForeignKey("dbo.AspNetUsers", t => t.applicationuser_Id)
                 .ForeignKey("dbo.userroles", t => t.userrole_userroleId)
                 .Index(t => t.applicationuser_Id)
                 .Index(t => t.userrole_userroleId);
-            
+
             CreateTable(
                 "dbo.AspNetUsers",
                 c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Email = c.String(maxLength: 256),
-                        EmailConfirmed = c.Boolean(nullable: false),
-                        PasswordHash = c.String(),
-                        SecurityStamp = c.String(),
-                        PhoneNumber = c.String(),
-                        PhoneNumberConfirmed = c.Boolean(nullable: false),
-                        TwoFactorEnabled = c.Boolean(nullable: false),
-                        LockoutEndDateUtc = c.DateTime(),
-                        LockoutEnabled = c.Boolean(nullable: false),
-                        AccessFailedCount = c.Int(nullable: false),
-                        UserName = c.String(nullable: false, maxLength: 256),
-                    })
+                {
+                    Id = c.String(nullable: false, maxLength: 128),
+                    Email = c.String(maxLength: 256),
+                    EmailConfirmed = c.Boolean(nullable: false),
+                    PasswordHash = c.String(),
+                    SecurityStamp = c.String(),
+                    PhoneNumber = c.String(),
+                    PhoneNumberConfirmed = c.Boolean(nullable: false),
+                    TwoFactorEnabled = c.Boolean(nullable: false),
+                    LockoutEndDateUtc = c.DateTime(),
+                    LockoutEnabled = c.Boolean(nullable: false),
+                    AccessFailedCount = c.Int(nullable: false),
+                    UserName = c.String(nullable: false, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.UserName, unique: true, name: "UserNameIndex");
-            
+
             CreateTable(
                 "dbo.AspNetUserClaims",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        ClaimType = c.String(),
-                        ClaimValue = c.String(),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    UserId = c.String(nullable: false, maxLength: 128),
+                    ClaimType = c.String(),
+                    ClaimValue = c.String(),
+                })
                 .PrimaryKey(t => t.Id)
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
             CreateTable(
                 "dbo.AspNetUserLogins",
                 c => new
-                    {
-                        LoginProvider = c.String(nullable: false, maxLength: 128),
-                        ProviderKey = c.String(nullable: false, maxLength: 128),
-                        UserId = c.String(nullable: false, maxLength: 128),
-                    })
+                {
+                    LoginProvider = c.String(nullable: false, maxLength: 128),
+                    ProviderKey = c.String(nullable: false, maxLength: 128),
+                    UserId = c.String(nullable: false, maxLength: 128),
+                })
                 .PrimaryKey(t => new { t.LoginProvider, t.ProviderKey, t.UserId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .Index(t => t.UserId);
-            
+
             CreateTable(
                 "dbo.AspNetUserRoles",
                 c => new
-                    {
-                        UserId = c.String(nullable: false, maxLength: 128),
-                        RoleId = c.String(nullable: false, maxLength: 128),
-                    })
+                {
+                    UserId = c.String(nullable: false, maxLength: 128),
+                    RoleId = c.String(nullable: false, maxLength: 128),
+                })
                 .PrimaryKey(t => new { t.UserId, t.RoleId })
                 .ForeignKey("dbo.AspNetUsers", t => t.UserId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetRoles", t => t.RoleId, cascadeDelete: true)
                 .Index(t => t.UserId)
                 .Index(t => t.RoleId);
-            
+
             CreateTable(
                 "dbo.moduls",
                 c => new
-                    {
-                        modulId = c.Int(nullable: false, identity: true),
-                        namamodul = c.String(nullable: false),
-                        namacontroller = c.String(nullable: false),
-                        alias = c.String(nullable: false),
-                    })
+                {
+                    modulId = c.Int(nullable: false, identity: true),
+                    namamodul = c.String(nullable: false),
+                    namacontroller = c.String(nullable: false),
+                    alias = c.String(nullable: false),
+                })
                 .PrimaryKey(t => t.modulId);
-            
+
             CreateTable(
                 "dbo.campaignactivitytypes",
                 c => new
-                    {
-                        campaignactivitytypeId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    campaignactivitytypeId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.campaignactivitytypeId);
-            
+
             CreateTable(
                 "dbo.campaignlines",
                 c => new
-                    {
-                        campaignlineId = c.Int(nullable: false, identity: true),
-                        campaignactivitytypeId = c.Int(nullable: false),
-                        activitydate = c.DateTime(nullable: false),
-                        description = c.String(),
-                        campaign_campaignId = c.Int(),
-                    })
+                {
+                    campaignlineId = c.Int(nullable: false, identity: true),
+                    campaignactivitytypeId = c.Int(nullable: false),
+                    activitydate = c.DateTime(nullable: false),
+                    description = c.String(),
+                    campaign_campaignId = c.Int(),
+                })
                 .PrimaryKey(t => t.campaignlineId)
                 .ForeignKey("dbo.campaigns", t => t.campaign_campaignId)
                 .ForeignKey("dbo.campaignactivitytypes", t => t.campaignactivitytypeId, cascadeDelete: true)
                 .Index(t => t.campaignactivitytypeId)
                 .Index(t => t.campaign_campaignId);
-            
+
             CreateTable(
                 "dbo.campaigns",
                 c => new
-                    {
-                        campaignId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        startdate = c.DateTime(nullable: false),
-                        enddate = c.DateTime(nullable: false),
-                        marketinglistId = c.Int(nullable: false),
-                        DetailForm_pkidx_campaignlineId = c.String(),
-                        DetailForm_ddl_campaignactivitytypeId = c.Int(nullable: false),
-                        DetailForm_activitydate = c.DateTime(nullable: false),
-                        DetailForm_description = c.String(),
-                    })
+                {
+                    campaignId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    startdate = c.DateTime(nullable: false),
+                    enddate = c.DateTime(nullable: false),
+                    marketinglistId = c.Int(nullable: false),
+                    DetailForm_pkidx_campaignlineId = c.String(),
+                    DetailForm_ddl_campaignactivitytypeId = c.Int(nullable: false),
+                    DetailForm_activitydate = c.DateTime(nullable: false),
+                    DetailForm_description = c.String(),
+                })
                 .PrimaryKey(t => t.campaignId)
                 .ForeignKey("dbo.marketinglists", t => t.marketinglistId, cascadeDelete: true)
                 .Index(t => t.marketinglistId);
-            
+
             CreateTable(
                 "dbo.marketinglists",
                 c => new
-                    {
-                        marketinglistId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        startdate = c.DateTime(nullable: false),
-                        enddate = c.DateTime(nullable: false),
-                        DetailForm_pkidx_marketinglistlineId = c.String(),
-                        DetailForm_ddl_accountId = c.Int(nullable: false),
-                        DetailForm_description = c.String(),
-                    })
+                {
+                    marketinglistId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    startdate = c.DateTime(nullable: false),
+                    enddate = c.DateTime(nullable: false),
+                    DetailForm_pkidx_marketinglistlineId = c.String(),
+                    DetailForm_ddl_accountId = c.Int(nullable: false),
+                    DetailForm_description = c.String(),
+                })
                 .PrimaryKey(t => t.marketinglistId);
-            
+
             CreateTable(
                 "dbo.marketinglistlines",
                 c => new
-                    {
-                        marketinglistlineId = c.Int(nullable: false, identity: true),
-                        accountId = c.Int(nullable: false),
-                        description = c.String(),
-                        marketinglist_marketinglistId = c.Int(),
-                    })
+                {
+                    marketinglistlineId = c.Int(nullable: false, identity: true),
+                    accountId = c.Int(nullable: false),
+                    description = c.String(),
+                    marketinglist_marketinglistId = c.Int(),
+                })
                 .PrimaryKey(t => t.marketinglistlineId)
                 .ForeignKey("dbo.accounts", t => t.accountId, cascadeDelete: true)
                 .ForeignKey("dbo.marketinglists", t => t.marketinglist_marketinglistId)
                 .Index(t => t.accountId)
                 .Index(t => t.marketinglist_marketinglistId);
-            
+
             CreateTable(
                 "dbo.caseslines",
                 c => new
-                    {
-                        caseslineId = c.Int(nullable: false, identity: true),
-                        actiondate = c.DateTime(nullable: false),
-                        actiondescription = c.String(),
-                        cases_casesId = c.Int(),
-                    })
+                {
+                    caseslineId = c.Int(nullable: false, identity: true),
+                    actiondate = c.DateTime(nullable: false),
+                    actiondescription = c.String(),
+                    cases_casesId = c.Int(),
+                })
                 .PrimaryKey(t => t.caseslineId)
                 .ForeignKey("dbo.cases", t => t.cases_casesId)
                 .Index(t => t.cases_casesId);
-            
+
             CreateTable(
                 "dbo.cases",
                 c => new
-                    {
-                        casesId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        reporteddate = c.DateTime(nullable: false),
-                        accountId = c.Int(nullable: false),
-                        productId = c.Int(nullable: false),
-                        statuscaseId = c.Int(nullable: false),
-                        DetailForm_pkidx_caseslineId = c.String(),
-                        DetailForm_actiondate = c.DateTime(),
-                        DetailForm_actiondescription = c.String(),
-                    })
+                {
+                    casesId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    reporteddate = c.DateTime(nullable: false),
+                    accountId = c.Int(nullable: false),
+                    productId = c.Int(nullable: false),
+                    statuscaseId = c.Int(nullable: false),
+                    DetailForm_pkidx_caseslineId = c.String(),
+                    DetailForm_actiondate = c.DateTime(),
+                    DetailForm_actiondescription = c.String(),
+                })
                 .PrimaryKey(t => t.casesId)
                 .ForeignKey("dbo.accounts", t => t.accountId, cascadeDelete: true)
                 .ForeignKey("dbo.products", t => t.productId, cascadeDelete: true)
@@ -327,161 +327,161 @@ namespace aegis.Migrations
                 .Index(t => t.accountId)
                 .Index(t => t.productId)
                 .Index(t => t.statuscaseId);
-            
+
             CreateTable(
                 "dbo.products",
                 c => new
-                    {
-                        productId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        costprice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        salesprice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        producttypeId = c.Int(nullable: false),
-                    })
+                {
+                    productId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    costprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    salesprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    producttypeId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.productId)
                 .ForeignKey("dbo.producttypes", t => t.producttypeId, cascadeDelete: true)
                 .Index(t => t.producttypeId);
-            
+
             CreateTable(
                 "dbo.producttypes",
                 c => new
-                    {
-                        producttypeId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    producttypeId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.producttypeId);
-            
+
             CreateTable(
                 "dbo.statuscases",
                 c => new
-                    {
-                        statuscaseId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    statuscaseId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.statuscaseId);
-            
+
             CreateTable(
                 "dbo.invoicelines",
                 c => new
-                    {
-                        invoicelineId = c.Int(nullable: false, identity: true),
-                        productId = c.Int(nullable: false),
-                        qty = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        unitprice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        invoice_invoiceId = c.Int(),
-                    })
+                {
+                    invoicelineId = c.Int(nullable: false, identity: true),
+                    productId = c.Int(nullable: false),
+                    qty = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    unitprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    invoice_invoiceId = c.Int(),
+                })
                 .PrimaryKey(t => t.invoicelineId)
                 .ForeignKey("dbo.invoices", t => t.invoice_invoiceId)
                 .ForeignKey("dbo.products", t => t.productId, cascadeDelete: true)
                 .Index(t => t.productId)
                 .Index(t => t.invoice_invoiceId);
-            
+
             CreateTable(
                 "dbo.invoices",
                 c => new
-                    {
-                        invoiceId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        accountId = c.Int(nullable: false),
-                        invoicedate = c.DateTime(nullable: false),
-                        billingaddress = c.String(),
-                        DetailForm_pkidx_invoicelineId = c.String(),
-                        DetailForm_ddl_productId = c.Int(nullable: false),
-                        DetailForm_qty = c.String(),
-                        DetailForm_unitprice = c.String(),
-                    })
+                {
+                    invoiceId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    accountId = c.Int(nullable: false),
+                    invoicedate = c.DateTime(nullable: false),
+                    billingaddress = c.String(),
+                    DetailForm_pkidx_invoicelineId = c.String(),
+                    DetailForm_ddl_productId = c.Int(nullable: false),
+                    DetailForm_qty = c.String(),
+                    DetailForm_unitprice = c.String(),
+                })
                 .PrimaryKey(t => t.invoiceId)
                 .ForeignKey("dbo.accounts", t => t.accountId, cascadeDelete: true)
                 .Index(t => t.accountId);
-            
+
             CreateTable(
                 "dbo.leads",
                 c => new
-                    {
-                        leadId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        firstname = c.String(),
-                        lastname = c.String(),
-                        organizationId = c.Int(nullable: false),
-                        rating = c.Int(nullable: false),
-                        email = c.String(),
-                        phone = c.String(),
-                        pic_Id = c.String(maxLength: 128),
-                    })
+                {
+                    leadId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    firstname = c.String(),
+                    lastname = c.String(),
+                    organizationId = c.Int(nullable: false),
+                    rating = c.Int(nullable: false),
+                    email = c.String(),
+                    phone = c.String(),
+                    pic_Id = c.String(maxLength: 128),
+                })
                 .PrimaryKey(t => t.leadId)
                 .ForeignKey("dbo.organizations", t => t.organizationId, cascadeDelete: true)
                 .ForeignKey("dbo.AspNetUsers", t => t.pic_Id)
                 .Index(t => t.organizationId)
                 .Index(t => t.pic_Id);
-            
+
             CreateTable(
                 "dbo.organizations",
                 c => new
-                    {
-                        organizationId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        fulladdress = c.String(),
-                        phone = c.String(),
-                        email = c.String(),
-                        website = c.String(),
-                        organizationtypeId = c.Int(nullable: false),
-                    })
+                {
+                    organizationId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    fulladdress = c.String(),
+                    phone = c.String(),
+                    email = c.String(),
+                    website = c.String(),
+                    organizationtypeId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.organizationId)
                 .ForeignKey("dbo.organizationtypes", t => t.organizationtypeId, cascadeDelete: true)
                 .Index(t => t.organizationtypeId);
-            
+
             CreateTable(
                 "dbo.organizationtypes",
                 c => new
-                    {
-                        organizationtypeId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    organizationtypeId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.organizationtypeId);
-            
+
             CreateTable(
                 "dbo.opportunitylines",
                 c => new
-                    {
-                        opportunitylineId = c.Int(nullable: false, identity: true),
-                        activitydate = c.DateTime(nullable: false),
-                        description = c.String(),
-                        opportunity_opportunityId = c.Int(),
-                    })
+                {
+                    opportunitylineId = c.Int(nullable: false, identity: true),
+                    activitydate = c.DateTime(nullable: false),
+                    description = c.String(),
+                    opportunity_opportunityId = c.Int(),
+                })
                 .PrimaryKey(t => t.opportunitylineId)
                 .ForeignKey("dbo.opportunities", t => t.opportunity_opportunityId)
                 .Index(t => t.opportunity_opportunityId);
-            
+
             CreateTable(
                 "dbo.opportunities",
                 c => new
-                    {
-                        opportunityId = c.Int(nullable: false, identity: true),
-                        stageId = c.Int(),
-                        statusopportunityId = c.Int(),
-                        accountId = c.Int(),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        value = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        winningprobability = c.Int(nullable: false),
-                        forecastclosedate = c.DateTime(nullable: false),
-                        DetailForm_pkidx_opportunitylineId = c.String(),
-                        DetailForm_activitydate = c.DateTime(nullable: false),
-                        DetailForm_description = c.String(),
-                    })
+                {
+                    opportunityId = c.Int(nullable: false, identity: true),
+                    stageId = c.Int(),
+                    statusopportunityId = c.Int(),
+                    accountId = c.Int(),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    value = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    winningprobability = c.Int(nullable: false),
+                    forecastclosedate = c.DateTime(nullable: false),
+                    DetailForm_pkidx_opportunitylineId = c.String(),
+                    DetailForm_activitydate = c.DateTime(nullable: false),
+                    DetailForm_description = c.String(),
+                })
                 .PrimaryKey(t => t.opportunityId)
                 .ForeignKey("dbo.accounts", t => t.accountId)
                 .ForeignKey("dbo.stages", t => t.stageId)
@@ -489,136 +489,135 @@ namespace aegis.Migrations
                 .Index(t => t.stageId)
                 .Index(t => t.statusopportunityId)
                 .Index(t => t.accountId);
-            
+
             CreateTable(
                 "dbo.stages",
                 c => new
-                    {
-                        stageId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        pipeId = c.Int(nullable: false),
-                    })
+                {
+                    stageId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    pipeId = c.Int(nullable: false),
+                })
                 .PrimaryKey(t => t.stageId)
                 .ForeignKey("dbo.pipes", t => t.pipeId, cascadeDelete: true)
                 .Index(t => t.pipeId);
-            
+
             CreateTable(
                 "dbo.pipes",
                 c => new
-                    {
-                        pipeId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    pipeId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.pipeId);
-            
+
             CreateTable(
                 "dbo.statusopportunities",
                 c => new
-                    {
-                        statusopportunityId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                    })
+                {
+                    statusopportunityId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                })
                 .PrimaryKey(t => t.statusopportunityId);
-            
+
             CreateTable(
                 "dbo.orderlines",
                 c => new
-                    {
-                        orderlineId = c.Int(nullable: false, identity: true),
-                        productId = c.Int(nullable: false),
-                        qty = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        unitprice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        order_orderId = c.Int(),
-                    })
+                {
+                    orderlineId = c.Int(nullable: false, identity: true),
+                    productId = c.Int(nullable: false),
+                    qty = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    unitprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    order_orderId = c.Int(),
+                })
                 .PrimaryKey(t => t.orderlineId)
                 .ForeignKey("dbo.orders", t => t.order_orderId)
                 .ForeignKey("dbo.products", t => t.productId, cascadeDelete: true)
                 .Index(t => t.productId)
                 .Index(t => t.order_orderId);
-            
+
             CreateTable(
                 "dbo.orders",
                 c => new
-                    {
-                        orderId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        accountId = c.Int(nullable: false),
-                        orderdate = c.DateTime(nullable: false),
-                        shipdate = c.DateTime(nullable: false),
-                        address = c.String(),
-                        shipaddress = c.String(),
-                        DetailForm_pkidx_orderlineId = c.String(),
-                        DetailForm_ddl_productId = c.Int(nullable: false),
-                        DetailForm_qty = c.String(),
-                        DetailForm_unitprice = c.String(),
-                    })
+                {
+                    orderId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    accountId = c.Int(nullable: false),
+                    orderdate = c.DateTime(nullable: false),
+                    shipdate = c.DateTime(nullable: false),
+                    address = c.String(),
+                    shipaddress = c.String(),
+                    DetailForm_pkidx_orderlineId = c.String(),
+                    DetailForm_ddl_productId = c.Int(nullable: false),
+                    DetailForm_qty = c.String(),
+                    DetailForm_unitprice = c.String(),
+                })
                 .PrimaryKey(t => t.orderId)
                 .ForeignKey("dbo.accounts", t => t.accountId, cascadeDelete: true)
                 .Index(t => t.accountId);
-            
+
             CreateTable(
                 "dbo.quotelines",
                 c => new
-                    {
-                        quotelineId = c.Int(nullable: false, identity: true),
-                        productId = c.Int(nullable: false),
-                        qty = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        unitprice = c.Decimal(nullable: false, precision: 18, scale: 2),
-                        quote_quoteId = c.Int(),
-                    })
+                {
+                    quotelineId = c.Int(nullable: false, identity: true),
+                    productId = c.Int(nullable: false),
+                    qty = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    unitprice = c.Decimal(nullable: false, precision: 18, scale: 2),
+                    quote_quoteId = c.Int(),
+                })
                 .PrimaryKey(t => t.quotelineId)
                 .ForeignKey("dbo.products", t => t.productId, cascadeDelete: true)
                 .ForeignKey("dbo.quotes", t => t.quote_quoteId)
                 .Index(t => t.productId)
                 .Index(t => t.quote_quoteId);
-            
+
             CreateTable(
                 "dbo.quotes",
                 c => new
-                    {
-                        quoteId = c.Int(nullable: false, identity: true),
-                        code = c.String(),
-                        name = c.String(),
-                        description = c.String(),
-                        accountId = c.Int(nullable: false),
-                        estimatedstartdate = c.DateTime(nullable: false),
-                        estimatedenddate = c.DateTime(nullable: false),
-                        DetailForm_pkidx_quotelineId = c.String(),
-                        DetailForm_ddl_productId = c.Int(nullable: false),
-                        DetailForm_qty = c.String(),
-                        DetailForm_unitprice = c.String(),
-                    })
+                {
+                    quoteId = c.Int(nullable: false, identity: true),
+                    code = c.String(),
+                    name = c.String(),
+                    description = c.String(),
+                    accountId = c.Int(nullable: false),
+                    estimatedstartdate = c.DateTime(nullable: false),
+                    estimatedenddate = c.DateTime(nullable: false),
+                    DetailForm_pkidx_quotelineId = c.String(),
+                    DetailForm_ddl_productId = c.Int(nullable: false),
+                    DetailForm_qty = c.String(),
+                    DetailForm_unitprice = c.String(),
+                })
                 .PrimaryKey(t => t.quoteId)
                 .ForeignKey("dbo.accounts", t => t.accountId, cascadeDelete: true)
                 .Index(t => t.accountId);
-            
+
             CreateTable(
                 "dbo.AspNetRoles",
                 c => new
-                    {
-                        Id = c.String(nullable: false, maxLength: 128),
-                        Name = c.String(nullable: false, maxLength: 256),
-                    })
+                {
+                    Id = c.String(nullable: false, maxLength: 128),
+                    Name = c.String(nullable: false, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id)
                 .Index(t => t.Name, unique: true, name: "RoleNameIndex");
-            
+
             CreateTable(
                 "dbo.userprofiles",
                 c => new
-                    {
-                        userprofileId = c.Int(nullable: false, identity: true),
-                        fullname = c.String(),
-                    })
+                {
+                    userprofileId = c.Int(nullable: false, identity: true),
+                    fullname = c.String(),
+                })
                 .PrimaryKey(t => t.userprofileId);
-            
         }
         
         public override void Down()

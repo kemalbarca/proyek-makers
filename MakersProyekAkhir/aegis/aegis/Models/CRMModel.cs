@@ -139,26 +139,33 @@ namespace aegis.Models
 
     public class pipe
     {
-        [Display(Name = "Pipe")]
         public int pipeId { get; set; }
+
         [Display(Name = "Pipe Code")]
+        [Required(ErrorMessage = "Code is required")]
         public string code { get; set; }
+
         [Display(Name = "Pipe Name")]
+        [Required(ErrorMessage = "Name is required")]
         public string name { get; set; }
+
+        [Display(Name = "Description")]
         public string description { get; set; }
 
     }
 
     public class stage
     {
-        [Display(Name = "Stage")]
         public int stageId { get; set; }
 
         [Display(Name = "Stage Code")]
+        [Required(ErrorMessage = "Code is required")]
         public string code { get; set; }
 
         [Display(Name = "Stage Name")]
+        [Required(ErrorMessage = "Name is required")]
         public string name { get; set; }
+        [Display(Name = "Description")]
         public string description { get; set; }
 
         [Display(Name = "Pipe")]
@@ -170,14 +177,17 @@ namespace aegis.Models
 
     public class statusopportunity
     {
-        [Display(Name = "Status Opportunity")]
         public int statusopportunityId { get; set; }
 
+        [Required(ErrorMessage = "Status Code is required!")]
         [Display(Name = "Status Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Status Name is required!")]
         [Display(Name = "Status Name")]
         public string name { get; set; }
+
+        [Display(Name = "Description")]
         public string description { get; set; }
 
     }
@@ -191,13 +201,13 @@ namespace aegis.Models
 
         public int opportunityId { get; set; }
         [Display(Name = "Stage")]
-        public int? stageId { get; set; }
+        public int stageId { get; set; }
         public virtual stage stage { get; set; }
         [Display(Name = "Status")]
         public int? statusopportunityId { get; set; }
         public virtual statusopportunity statusopportunity { get; set; }
         [Display(Name = "Account")]
-        public int? accountId { get; set; }
+        public int accountId { get; set; }
         public virtual account account { get; set; }
         public string code { get; set; }
         public string name { get; set; }
@@ -224,13 +234,14 @@ namespace aegis.Models
 
     public class producttype
     {
-        [Display(Name = "Product Type")]
         public int producttypeId { get; set; }
 
         [Display(Name = "Product Type Code")]
+        [Required(ErrorMessage = "Code is required")]
         public string code { get; set; }
 
         [Display(Name = "Product Type Name")]
+        [Required(ErrorMessage = "Name is required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
@@ -239,7 +250,6 @@ namespace aegis.Models
 
     public class product
     {
-        [Display(Name = "Product")]
         public int productId { get; set; }
 
         [Display(Name = "Product Code")]
@@ -250,9 +260,18 @@ namespace aegis.Models
         public string name { get; set; }
 
         [Display(Name = "Description")]
+        [Required(ErrorMessage = "Description is required")]
         public string description { get; set; }
+
+        [Display(Name = "Cost Price")]
+        [Required(ErrorMessage = "Cost price is required")]
         public decimal costprice { get; set; }
+
+        [Display(Name = "Sales Price")]
+        [Required(ErrorMessage = "Sales price required")]
         public decimal salesprice { get; set; }
+
+        [Display(Name = "Product Type")]
         public int producttypeId { get; set; }
         public virtual producttype producttype { get; set; }
     }
@@ -471,7 +490,6 @@ namespace aegis.Models
 
     public class statuscase
     {
-        [Display(Name = "Case Status")]
         public int statuscaseId { get; set; }
 
         [Display(Name = "Case Status Code")]
@@ -486,28 +504,39 @@ namespace aegis.Models
 
     public class cases
     {
-        [Display(Name = "Cases")]
         public int casesId { get; set; }
 
         [Display(Name = "Cases Code")]
+        [Required(ErrorMessage = "Code is required!")]
         public string code { get; set; }
 
         [Display(Name = "Cases Name")]
+        [Required(ErrorMessage = "Name is required!")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
+
         [Display(Name = "Reported Date")]
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime reporteddate { get; set; }
+
         [Display(Name = "Account")]
+        [Required(ErrorMessage = "Account is required!")]
         public int accountId { get; set; }
+
         public account account { get; set; }
+
         [Display(Name = "Product")]
         public int productId { get; set; }
         public product product { get; set; }
+
+
         [Display(Name = "Case Status")]
         public int statuscaseId { get; set; }
         public virtual statuscase statuscase { get; set; }
+
+
         public virtual List<casesline> casesline { get; set; }
         public string DetailForm_pkidx_caseslineId { get; set; }
         public DateTime? DetailForm_actiondate { get; set; }
@@ -527,9 +556,15 @@ namespace aegis.Models
     {
         public int organizationtypeId { get; set; }
 
+        [Required(ErrorMessage = "Code is required!")]
+        [Display(Name = "Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Name is required!")]
+        [Display(Name = "Name")]
         public string name { get; set; }
+
+        [Display(Name = "Description")]
         public string description { get; set; }
 
 
@@ -539,15 +574,38 @@ namespace aegis.Models
     {
         public int organizationId { get; set; }
 
+        [Required(ErrorMessage = "Code is required!")]
+        [Display(Name = "Organization Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Name is required!")]
+        [Display(Name = "Organization Name")]
         public string name { get; set; }
+
+        [Display(Name = "Description")]
         public string description { get; set; }
+
+        [Required(ErrorMessage = "Address is required!")]
+        [Display(Name = "Full Address")]
         public string fulladdress { get; set; }
+
+        [StringLength(13, MinimumLength = 10)]
+        [Required(ErrorMessage = "PhoneNumber is required!")]
+        [Display(Name = "Phone Number")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Not a valid Phone number")]
         public string phone { get; set; }
+
+        [Required(ErrorMessage = "Email is required!")]
+        [Display(Name = "Email")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Not a valid email")]
         public string email { get; set; }
+
+        [Display(Name = "Website")]
         public string website { get; set; }
+
+        [Display(Name = "Organization Type ID")]
         public int organizationtypeId { get; set; }
+        [Display(Name = "Organization Type")]
         public virtual organizationtype organizationtype { get; set; }
 
 
@@ -557,17 +615,38 @@ namespace aegis.Models
     {
         public int leadId { get; set; }
 
+        [Required(ErrorMessage = "Code is required!")]
+        [Display(Name = "Lead Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "First name is required!")]
+        [Display(Name = "First Name")]
         public string firstname { get; set; }
+
+        [Required(ErrorMessage = "Last name is required!")]
+        [Display(Name = "Last Name")]
         public string lastname { get; set; }
+
+        [Display(Name = "Organization")]
         public int organizationId { get; set; }
         public virtual organization organization { get; set; }
 
+        [Range(1, 10, ErrorMessage = "Rating must be between 1 and 10")]
+        [Required(ErrorMessage = "Rating is required!")]
+        [Display(Name = "Rating")]
         public int rating { get; set; }
 
         public virtual ApplicationUser pic { get; set; }
+
+        [Required(ErrorMessage = "Email is required!")]
+        [Display(Name = "Email")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Not a valid email")]
         public string email { get; set; }
+
+        [StringLength(13, MinimumLength = 10)]
+        [Required(ErrorMessage = "PhoneNumber is required!")]
+        [Display(Name = "Phone Number")]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Not a valid Phone number")]
         public string phone { get; set; }
 
 

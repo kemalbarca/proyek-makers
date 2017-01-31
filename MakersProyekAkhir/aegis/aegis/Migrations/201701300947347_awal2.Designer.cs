@@ -13,7 +13,7 @@ namespace aegis.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201701260502589_awal2"; }
+            get { return "201701300947347_awal2"; }
         }
         
         string IMigrationMetadata.Source
