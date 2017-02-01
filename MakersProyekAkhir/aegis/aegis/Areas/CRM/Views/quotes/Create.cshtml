@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.accountId, "Account", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.accountId)

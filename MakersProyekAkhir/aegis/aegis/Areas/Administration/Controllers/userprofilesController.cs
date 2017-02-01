@@ -90,6 +90,8 @@ namespace aegis.Areas.Administration.Controllers
         // GET: /Administration/userprofiles/Create
         public ActionResult Create()
         {
+            ViewBag.Name = new SelectList(db.userroles.Where(u => !u.rolename.Contains("ADMIN"))
+                                  .ToList(), "Name", "Name");
             return View();
         }
 
@@ -166,6 +168,11 @@ namespace aegis.Areas.Administration.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //Assign Role to user Here       
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                    //Ends Here     
+                    ViewBag.Name = new SelectList(db.userroles.Where(u => !u.rolename.Contains("ADMIN"))
+                                  .ToList(), "Name", "Name");
 
                     return RedirectToAction("Index");
                 }
@@ -315,6 +322,7 @@ namespace aegis.Areas.Administration.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
+            ViewBag.userroleIdList = new SelectList(db.userroles, "userroleId", "rolename");
             return View();
         }
 
@@ -338,6 +346,11 @@ namespace aegis.Areas.Administration.Controllers
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    //Assign Role to user Here
+                    await this.UserManager.AddToRoleAsync(user.Id, model.UserRoles);
+                    //Ends Here     
+                    ViewBag.Name = new SelectList(db.userroles.Where(u => !u.rolename.Contains("Admin"))
+                                  .ToList(), "Name", "Name");
 
                     return RedirectToAction("Index", "Home");
                 }

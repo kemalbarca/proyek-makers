@@ -32,7 +32,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Edit invoice</h5>
+                    <h5>Edit Invoice</h5>
                 </div>
                 <div class="ibox-content">
 
@@ -70,7 +70,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.accountId, "Account ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
 
@@ -165,6 +165,7 @@
 @section Scripts{
     @Scripts.Render("~/plugins/dataPicker")
     @Scripts.Render("~/plugins/jqGrid")
+	@Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -217,11 +218,11 @@
                 rowNum: 20,
                 rowList: [10, 20, 30],
                 colNames: [
-                'invoicelineId'
+                'Invoiceline Id'
 
-            , 'ddl_productId'
-                , 'qty'
-                , 'unitprice'
+            , 'ddl_product Id'
+                , 'Quantity'
+                , 'Unit Price'
 ],
                 colModel: [
                 { key: true, hidden: true, editable: true, editrules: { edithidden: false }, name: 'invoicelineId', index: 'invoicelineId' }
@@ -319,6 +320,4 @@
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+

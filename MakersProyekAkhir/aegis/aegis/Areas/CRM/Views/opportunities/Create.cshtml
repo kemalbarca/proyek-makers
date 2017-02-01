@@ -43,7 +43,7 @@
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.stageId, "stageId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.stageId, "Stage", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("stageId", (IEnumerable<SelectListItem>)ViewBag.stageIdList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.stageId)
@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.statusopportunityId, "statusopportunityId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.statusopportunityId, "Status Opportunity", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("statusopportunityId", (IEnumerable<SelectListItem>)ViewBag.statusopportunityIdList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.statusopportunityId)
@@ -59,7 +59,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.accountId, "Account", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.accountId)
@@ -107,7 +107,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.forecastclosedate, new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.forecastclosedate, "Forecast Close Date", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 <div class="input-group date" id="forecastclosedate">
                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>

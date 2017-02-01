@@ -10,7 +10,7 @@
         <h2>Index</h2>
         <ol class="breadcrumb">
             <li class="active">
-                <strong>account</strong>
+                <strong>Account</strong>
             </li>
         </ol>
     </div>
@@ -22,7 +22,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>List of account</h5>
+                    <h5>List of Account</h5>
 					<div class="ibox-tools">
 						@Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-primary btn-xs"})
 					</div>
@@ -71,27 +71,27 @@
                 rowList: [10, 20, 30],
                 colNames: [
 
-        'accountId'
+        'Account ID'
 
-        , 'code'
+        , 'Code'
 
-        , 'name'
+        , 'Name'
 
-        , 'telephone'
+        , 'Telephone'
 
-        , 'email'
+        , 'Email'
 
-        , 'address'
+        , 'Address'
 
-        , 'accounttypeId'
+        , 'Account Type ID'
 
-        , 'leadsourceId'
+        , 'LeadSource ID'
 
-        , 'statusleadId'
+        , 'Status Lead ID'
 ],
                 colModel: [
 
-    { key: true, hidden: true, name: 'accountId', index: 'accountId' }
+    { key: true, name: 'accountId', index: 'accountId' }
 
 
         , { key: false, name: 'code', index: 'code' }

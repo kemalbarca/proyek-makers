@@ -62,32 +62,40 @@ namespace aegis.Models
             
         public int accountId { get; set; }
 
+        [Required(ErrorMessage = "Account code is required")]
         [Display(Name = "Account Code")]
         public string code { get; set; }
-
+        
         [Display(Name = "Account Name")]
         [Required(ErrorMessage = "Name is required")]
         public string name { get; set; }
 
+        [Required(ErrorMessage = "Telephone is required")]
+        [StringLength(13, MinimumLength = 10)]
+        [RegularExpression(@"^\d+$", ErrorMessage = "Not a valid Phone number")]
+        [Display(Name = "Phone Number")]
         public string telephone { get; set; }
 
+        [Required(ErrorMessage = "Email is required")]
+        [RegularExpression(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$", ErrorMessage = "Not a valid email")]
+        [Display(Name = "Email")]
         public string email { get; set; }
+        //public 
 
+        [Display(Name = "Address")]
         public string address { get; set; }
 
         [Display(Name = "Account Type")]
         public int accounttypeId { get; set; }
 
         public virtual accounttype accounttype { get; set; }
-
+        
         [Display(Name = "Lead Source")]
         public int leadsourceId { get; set; }
-
         public virtual leadsource leadsource { get; set; }
 
         [Display(Name = "Lead Status")]
         public int statusleadId { get; set; }
-
         public virtual statuslead statuslead { get; set; }
 
         public virtual List<accountactivityline> accountactivityline { get; set; }
@@ -177,13 +185,14 @@ namespace aegis.Models
 
     public class statusopportunity
     {
+        [Display(Name = "Status Opportunity")]
         public int statusopportunityId { get; set; }
 
-        [Required(ErrorMessage = "Status Code is required!")]
+        [Required(ErrorMessage = "Status Code is required")]
         [Display(Name = "Status Code")]
         public string code { get; set; }
 
-        [Required(ErrorMessage = "Status Name is required!")]
+        [Required(ErrorMessage = "Status Name is required")]
         [Display(Name = "Status Name")]
         public string name { get; set; }
 
@@ -200,20 +209,38 @@ namespace aegis.Models
         }
 
         public int opportunityId { get; set; }
+
+        [Required(ErrorMessage = "Stage Code is required")]
         [Display(Name = "Stage")]
-        public int stageId { get; set; }
+        public int? stageId { get; set; }
         public virtual stage stage { get; set; }
+
+        [Required(ErrorMessage = "Status is required")]
         [Display(Name = "Status")]
         public int? statusopportunityId { get; set; }
         public virtual statusopportunity statusopportunity { get; set; }
+
         [Display(Name = "Account")]
-        public int accountId { get; set; }
+        public int? accountId { get; set; }
         public virtual account account { get; set; }
+
+        [Required(ErrorMessage = "Opportunity Code is required")]
+        [Display(Name = "Opportunity Code")]
         public string code { get; set; }
+
+        [Required(ErrorMessage = "Opportunity Name is required")]
+        [Display(Name = "Opportunity Name")]
         public string name { get; set; }
+
+        [Display(Name = "Description")]
         public string description { get; set; }
+
+        [Display(Name = "Value")]
         public decimal value { get; set; }
+
+        [Display(Name = "Winning Probability")]
         public int winningprobability { get; set; }
+
         public DateTime forecastclosedate { get; set; }
 
         public virtual List<opportunityline> opportunityline { get; set; }
@@ -281,19 +308,25 @@ namespace aegis.Models
         [Display(Name = "Quote")]
         public int quoteId { get; set; }
 
+        [Required(ErrorMessage = "Quote Code is required")]
         [Display(Name = "Quote Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Quote name is required")]
         [Display(Name = "Quote Name")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
+
+        [Required(ErrorMessage = "Account is required")]
         [Display(Name = "Account")]
         public int accountId { get; set; }
         public virtual account account { get; set; }
+
         [Display(Name = "Est Start Date")]
         public DateTime estimatedstartdate { get; set; }
+
         [Display(Name = "Est End Date")]
         public DateTime estimatedenddate { get; set; }
         public virtual List<quoteline> quoteline { get; set; }
@@ -322,23 +355,36 @@ namespace aegis.Models
         [Display(Name = "Order")]
         public int orderId { get; set; }
 
+        [Required(ErrorMessage = "Order Code is required")]
         [Display(Name = "Order Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Order Name is required")]
         [Display(Name = "Order Name")]
-        [Required(ErrorMessage = "Name is required")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
-        [Display(Name = "Account")]
+
+        [Required(ErrorMessage = "Account is required")]
         public int accountId { get; set; }
+        [Display(Name = "Account")]
+        
         public virtual account account { get; set; }
+
+        [Required(ErrorMessage = "Order Date is required")]
         [Display(Name = "Order Date")]
         public DateTime orderdate { get; set; }
+
         [Display(Name = "Requested Ship Date")]
         public DateTime shipdate { get; set; }
+
+        [Required(ErrorMessage = "Address is required")]
+        [Display(Name = "Address")]
         public string address { get; set; }
+
+        [Required(ErrorMessage = "Ship address is required")]
+        [Display(Name = "Ship Address")]
         public string shipaddress { get; set; }
         public virtual List<orderline> orderline { get; set; }
         public string DetailForm_pkidx_orderlineId { get; set; }
@@ -346,6 +392,7 @@ namespace aegis.Models
         public string DetailForm_qty { get; set; }
         public string DetailForm_unitprice { get; set; }
     }
+
 
     public class orderline
     {
@@ -366,19 +413,26 @@ namespace aegis.Models
         [Display(Name = "Invoice")]
         public int invoiceId { get; set; }
 
+        [Required(ErrorMessage = "Invoice Code is required")]
         [Display(Name = "Invoice Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Invoice Name is required")]
         [Display(Name = "Invoice Name")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
+
+        
         [Display(Name = "Account")]
         public int accountId { get; set; }
         public virtual account account { get; set; }
+
         [Display(Name = "Invoice Date")]
         public DateTime invoicedate { get; set; }
+
+        [Required(ErrorMessage = "Billing address is required")]
         [Display(Name = "Billing Address")]
         public string billingaddress { get; set; }
         public virtual List<invoiceline> invoiceline { get; set; }
@@ -407,16 +461,20 @@ namespace aegis.Models
         [Display(Name = "Marketing List")]
         public int marketinglistId { get; set; }
 
+        [Required(ErrorMessage = "Marketing Code is required")]
         [Display(Name = "Marketing List Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Marketing Name is required")]
         [Display(Name = "Marketing List Name")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
+
         [Display(Name = "Start Date")]
         public DateTime startdate { get; set; }
+
         [Display(Name = "End Date")]
         public DateTime enddate { get; set; }
         public virtual List<marketinglistline> marketinglistline { get; set; }
@@ -454,25 +512,31 @@ namespace aegis.Models
         [Display(Name = "Campaign")]
         public int campaignId { get; set; }
 
+        [Required(ErrorMessage = "Campaign Code is required")]
         [Display(Name = "Campaign Code")]
         public string code { get; set; }
 
+        [Required(ErrorMessage = "Campaign Name is required")]
         [Display(Name = "Campaign Name")]
         public string name { get; set; }
 
         [Display(Name = "Description")]
         public string description { get; set; }
+
         [Display(Name = "Start Date")]
         public DateTime startdate { get; set; }
+
         [Display(Name = "End Date")]
         public DateTime enddate { get; set; }
+
         [Display(Name = "Marketing List")]
         public int marketinglistId { get; set; }
+
         public virtual marketinglist marketinglist { get; set; }
         public virtual List<campaignline> campaignline { get; set; }
         public string DetailForm_pkidx_campaignlineId { get; set; }
         public int DetailForm_ddl_campaignactivitytypeId { get; set; }
-        public DateTime DetailForm_activitydate { get; set; }
+        public DateTime? DetailForm_activitydate { get; set; }
         public string DetailForm_description { get; set; }
     }
 

@@ -91,7 +91,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.marketinglistId, "marketinglistId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.marketinglistId, "Marketing List", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("marketinglistId", (IEnumerable<SelectListItem>)ViewBag.marketinglistIdList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.marketinglistId)

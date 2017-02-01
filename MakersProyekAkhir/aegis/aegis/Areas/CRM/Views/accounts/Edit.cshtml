@@ -32,7 +32,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Edit account</h5>
+                    <h5>Edit Account</h5>
                 </div>
                 <div class="ibox-content">
 
@@ -86,7 +86,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.accounttypeId, "accounttypeId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.accounttypeId, "Account Type Id", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("accounttypeId", (IEnumerable<SelectListItem>)ViewBag.accounttypeIdList, new { @class = "form-control" })
 
@@ -95,7 +95,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.leadsourceId, "leadsourceId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.leadsourceId, "Lead Source ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("leadsourceId", (IEnumerable<SelectListItem>)ViewBag.leadsourceIdList, new { @class = "form-control" })
 
@@ -104,7 +104,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.statusleadId, "statusleadId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.statusleadId, "Status Lead ID", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("statusleadId", (IEnumerable<SelectListItem>)ViewBag.statusleadIdList, new { @class = "form-control" })
 
@@ -180,6 +180,7 @@
 @section Scripts{
     @Scripts.Render("~/plugins/dataPicker")
     @Scripts.Render("~/plugins/jqGrid")
+	@Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -224,13 +225,13 @@
                 rowNum: 20,
                 rowList: [10, 20, 30],
                 colNames: [
-                'accountactivitylineId'
+                'Account Activityline Id'
 
-            , 'ddl_accountactivitytypeId'
+            , 'ddl_account Activitytype Id'
 
-            , 'activitydate'
+            , 'Activity Date'
 
-                , 'description'
+                , 'Description'
 ],
                 colModel: [
                 { key: true, hidden: true, editable: true, editrules: { edithidden: false }, name: 'accountactivitylineId', index: 'accountactivitylineId' }
@@ -345,6 +346,4 @@
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+

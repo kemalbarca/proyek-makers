@@ -67,7 +67,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.accountId, "Account", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.accountId)
@@ -79,7 +79,7 @@
             <div class="col-md-10">
                 <div class="input-group date" id="orderdate">
                      <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                    @Html.TextBoxFor(model => model.orderdate, new { @class= "form-control" })
+                    @Html.EditorFor(model => model.orderdate, new { @class= "form-control" })
                 </div>
 
                 @Html.ValidationMessageFor(model => model.orderdate)

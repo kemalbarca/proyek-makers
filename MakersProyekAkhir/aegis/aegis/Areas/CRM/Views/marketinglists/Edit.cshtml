@@ -32,7 +32,7 @@
         <div class="col-lg-12">
             <div class="ibox float-e-margins">
                 <div class="ibox-title">
-                    <h5>Edit marketinglist</h5>
+                    <h5>Edit Marketing List</h5>
                 </div>
                 <div class="ibox-content">
 
@@ -153,6 +153,7 @@
 @section Scripts{
     @Scripts.Render("~/plugins/dataPicker")
     @Scripts.Render("~/plugins/jqGrid")
+	@Scripts.Render("~/bundles/jqueryval")
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -213,10 +214,10 @@
                 rowNum: 20,
                 rowList: [10, 20, 30],
                 colNames: [
-                'marketinglistlineId'
+                'Marketing Listline Id'
 
             , 'ddl_accountId'
-                , 'description'
+                , 'Description'
 ],
                 colModel: [
                 { key: true, hidden: true, editable: true, editrules: { edithidden: false }, name: 'marketinglistlineId', index: 'marketinglistlineId' }
@@ -313,6 +314,4 @@
 
 
 
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+
