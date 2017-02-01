@@ -81,7 +81,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.accountId, "accountId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.accountId, "Account", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("accountId", (IEnumerable<SelectListItem>)ViewBag.accountIdList, new { @class = "form-control" })
 
@@ -90,7 +90,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.productId, "productId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.productId, "Product", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("productId", (IEnumerable<SelectListItem>)ViewBag.productIdList, new { @class = "form-control" })
 
@@ -99,7 +99,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.statuscaseId, "statuscaseId", new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.statuscaseId, "Status Case", new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("statuscaseId", (IEnumerable<SelectListItem>)ViewBag.statuscaseIdList, new { @class = "form-control" })
 

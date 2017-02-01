@@ -34,7 +34,7 @@ namespace aegis.Areas.CRM.Controllers
                     phone = l.phone,
                     nameorganization = l.organization.name
                 };
-            return Json(db.leads.ToList(), JsonRequestBehavior.AllowGet);
+            return Json(leads.ToList(), JsonRequestBehavior.AllowGet);
         }
 
 
